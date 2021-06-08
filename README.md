@@ -1,1 +1,1 @@
-# Application-Management-System
+# Applicant-Management-System
