@@ -1,0 +1,15 @@
+{
+    "name": "ax/applicant-management-system",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Suzaku",
+            "email": "jcfababeir09@gmail.com"
+        }
+    ],
+    "require": {}
+}
