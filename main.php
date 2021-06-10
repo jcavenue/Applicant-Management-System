@@ -5,7 +5,7 @@
 	if(!isset($_SESSION['userid']) || time() - $_SESSION['login_time'] > 30 * 60){
 		session_unset();
 		session_destroy();
-		header("Location: login.php");
+		header("Location: login");
 	} else {
 		$_SESSION['login_time'] = time();
 		session_regenerate_id(true);
