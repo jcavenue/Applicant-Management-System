@@ -1,11 +1,12 @@
 <?php
+	require_once("vendor/autoload.php");
+
 	session_start();
 	if(isset($_SESSION['error'])){
 		echo $_SESSION['error'];
 		session_unset();
 	}
-	require_once("vendor/autoload.php");
-
+	
 	use app\Connection;
 	
 	try {
@@ -19,7 +20,7 @@
 		$email = strtolower(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL));
 		$pw = strtolower(trim(htmlspecialchars($_POST['pw'])));
 
-		$sql = "SELECT email, pw FROM hr WHERE email=:email LIMIT 1";
+	$sql = "SELECT id, email, pw FROM hr WHERE email=:email LIMIT 1";
 		$stmt = $conn->prepare($sql);
 		$stmt->execute([':email'=>$email]);
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -29,6 +30,8 @@
 			header('Location: login.php');
 		} else {
 			if(password_verify($pw,$row['pw'])){
+				$_SESSION['userid'] = $row['id'];
+				$_SESSION['login_time'] = time();
 				header('Location: main.php');
 			} else {	
 				$_SESSION['error'] = 'Wrong Password';
