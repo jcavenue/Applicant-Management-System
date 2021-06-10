@@ -32,6 +32,7 @@
 			if(password_verify($pw,$row['pw'])){
 				$_SESSION['userid'] = $row['id'];
 				$_SESSION['login_time'] = time();
+				session_write_close();
 				header('Location: main.php');
 			} else {	
 				$_SESSION['error'] = 'Wrong Password';
