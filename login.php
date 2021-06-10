@@ -52,7 +52,7 @@
 	<title>Document</title>
 </head>
 <body>
-	<form action="login.php" method="post">
+	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 		<label for="">email</label><input type="email" name="email" id="">
 		<label for="">password</label><input type="password" name="pw" id="">
 		<button type="submit"name="submit">login</button>
