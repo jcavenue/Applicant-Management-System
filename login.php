@@ -27,16 +27,16 @@
 
 		if($stmt->rowcount() != 1){
 			$_SESSION['error'] = 'No User found';
-			header('Location: login.php');
+			header('Location: login');
 		} else {
 			if(password_verify($pw,$row['pw'])){
 				$_SESSION['userid'] = $row['id'];
 				$_SESSION['login_time'] = time();
 				session_write_close();
-				header('Location: main.php');
+				header('Location: main');
 			} else {	
 				$_SESSION['error'] = 'Wrong Password';
-				header('Location: login.php');
+				header('Location: login');
 			}
 		}
 
