@@ -1,5 +1,5 @@
 <?php
-	session_set_cookie_params(0,'/','localhost',true,true);
+	session_set_cookie_params(0, '/', 'localhost', true, true);
 	session_start();
 
 	if(!isset($_SESSION['userid']) || time() - $_SESSION['login_time'] > 30 * 60){
@@ -14,7 +14,6 @@
 	}
 
 	require_once("vendor/autoload.php");
-
 	use app\Connection;
 
 	try {
