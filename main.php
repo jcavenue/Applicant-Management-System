@@ -16,17 +16,13 @@
 	require_once("vendor/autoload.php");
 	use app\Connection;
 
-	try {
-		$conn = Connection::get()->connect();
-	} catch (PDOException $e) {
-		echo $e->getMessage();
-	}
-	
+	$conn = Connection::get()->connect();
+
 	$sql = "SELECT COUNT(*)FROM applicant WHERE hr_id=:user";
 			$stmt = $conn->prepare($sql);
 			$stmt->execute([':user'=>$user_id]);
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			echo "Number of applicant : " . $row['count'] . "<br>";
-
+			
 ?>
 <a href="logout.php">logout</a>

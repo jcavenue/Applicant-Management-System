@@ -9,11 +9,7 @@
 	use app\Connection;
 	use app\Authenticate;
 	
-	try {
-		$conn = Connection::get()->connect();
-	} catch (PDOException $e) {
-		echo $e->getMessage();
-	}
+	$conn = Connection::get()->connect();
 
 	if(isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['pw'])){		
 

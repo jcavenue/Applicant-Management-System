@@ -21,8 +21,12 @@ class Connection {
                 $params['user'], 
                 $params['password']);
 
-        $pdo = new \PDO($conStr);
-        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		try {
+			$pdo = new \PDO($conStr);
+			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		} catch (PDOException $e) {
+			echo "Error Found" . $e->getMessage();
+		}
 
         return $pdo;
     }
