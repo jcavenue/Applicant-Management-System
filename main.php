@@ -2,27 +2,41 @@
 	session_set_cookie_params(0, '/', 'localhost', true, true);
 	session_start();
 
-	if(!isset($_SESSION['userid']) || time() - $_SESSION['login_time'] > 30 * 60){
+	if(!isset($_SESSION['username']) && $_SESSION['Auth'] !== true || time() - $_SESSION['login_time'] > 30 * 60){
 		session_unset();
 		session_destroy();
 		header("Location: login");
 	} else {
 		$_SESSION['login_time'] = time();
 		session_regenerate_id(true);
-		echo "Welcome " . $_SESSION['userid'] . "<br>";
-		$user_id = $_SESSION['userid'];
+		echo "Welcome " . $_SESSION['username'] . "<br>";
+		$userid = $_SESSION['id'];
 	}
 
 	require_once("vendor/autoload.php");
 	use app\Connection;
+	use app\Dashboard;
 
 	$conn = Connection::get()->connect();
-
-	$sql = "SELECT COUNT(*)FROM applicant WHERE hr_id=:user";
-			$stmt = $conn->prepare($sql);
-			$stmt->execute([':user'=>$user_id]);
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			echo "Number of applicant : " . $row['count'] . "<br>";
-			
+	$account_detail = new Dashboard($conn, $userid);
+	$view = $account_detail->getDetails();
+	print_r($view);	
 ?>
-<a href="logout.php">logout</a>
+<table>
+	<?php foreach($view as $key => $value){ ?>
+		<tr>
+			<td>
+				<?php echo $key?>
+			</td>
+			<td>
+				<?php echo $value?>
+			</td>
+		</tr>
+	<?php } ?>
+
+</table>
+
+
+
+
+<a href="../logout">logout</a>

@@ -24,7 +24,7 @@ class Connection {
 		try {
 			$pdo = new \PDO($conStr);
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $e) {
+		} catch (\PDOException $e) {
 			echo "Error Found" . $e->getMessage();
 		}
 
